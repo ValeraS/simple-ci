@@ -1,0 +1,36 @@
+<extends src="src/pages/index.html">
+  <block name="content">
+    <h1>Task {{ id }}</h1>
+    <div>Status: {{ status }}</div>
+    <div>Hash: {{ hash }}</div>
+    <div>
+      Command:
+      <code>
+        <pre>
+{{ command }}
+        </pre>
+      </code>
+    </div>
+    <if condition="typeof result.status !== 'undefined'">
+      <h2>Result</h2>
+        <div>Exit code: {{ result.status }}</div>
+        <div>
+          stdout:
+          <code>
+            <pre>
+{{ result.stdOut }}
+            </pre>
+          </code>
+        </div>
+        <div>
+          stderr:
+          <code>
+            <pre>
+{{ result.stdErr }}
+              </pre
+            >
+          </code>
+        </div>
+    </if>
+  </block>
+</extends>

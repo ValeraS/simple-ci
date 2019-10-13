@@ -1,0 +1,24 @@
+{
+  "name": "ci-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "CI server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ValeraS/simple-ci/server"
+  },
+  "scripts": {
+    "build-docker-image": "docker build -t valera-s/ci-server .",
+    "start": "docker run -p 3000:3000 -d valera-s/ci-server"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nanoid": "^2.1.3",
+    "node-fetch": "^2.6.0",
+    "posthtml": "^0.12.0",
+    "posthtml-expressions": "^1.1.1",
+    "posthtml-extend": "^0.3.0"
+  }
+}
