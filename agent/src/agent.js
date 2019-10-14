@@ -3,16 +3,11 @@ const fetch = require('node-fetch');
 
 const loaders = require('./loaders');
 
-module.exports = async function StartAgent({
-  serverHost,
-  serverPort,
-  host,
-  port,
-  ...opts
-}) {
+module.exports = async function StartAgent(opts) {
+  const { agentHost, agentPort, serverHost, serverPort, port, host } = opts;
   const app = express();
 
-  await loaders({ app, serverHost, serverPort, ...opts });
+  await loaders({ app, ...opts });
 
   app.listen(port, host, err => {
     if (err) {
@@ -24,7 +19,7 @@ module.exports = async function StartAgent({
 
     fetch(`http://${serverHost}:${serverPort}/notify_agent`, {
       method: 'POST',
-      body: JSON.stringify({ host, port }),
+      body: JSON.stringify({ host: agentHost, port: agentPort }),
       headers: { 'Content-Type': 'application/json' },
     }).then(
       async res => {

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build-docker-image": "docker build -t valera-s/ci-server .",
-    "start": "docker run -p 3000:3000 -d valera-s/ci-server"
+    "start": "docker run -d -p 3000:3000 --rm --name ci-server --network ci-net valera-s/ci-server"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

@@ -4,6 +4,8 @@ const { resolve } = require('path');
 const defaultCfg = {
   host: '0.0.0.0',
   port: '8000',
+  agentHost: '127.0.0.1',
+  agentPort: '8000',
   serverHost: '127.0.0.1',
   serverPort: '3000',
   buildPath: '.',
@@ -20,12 +22,8 @@ const config = Object.assign({}, defaultCfg, envCfg);
 
 config.serverHost = process.argv[2] || config.serverHost;
 config.serverPort = Number.parseInt(process.argv[3] || config.serverPort);
-config.port = Number.parseInt(process.argv[4] || config.port);
-config.buildPath = resolve(process.argv[5] || config.buildPath);
-config.runInDocker = process.env.RUN_IN_DOCKER || false;
-
-if (config.runInDocker) {
-  config.gateway = require('default-gateway').v4.sync().gateway;
-}
+config.agentHost = process.argv[4] || config.agentHost;
+config.agentPort = Number.parseInt(process.argv[5] || config.agentPort);
+config.buildPath = resolve(process.argv[6] || config.buildPath);
 
 module.exports = config;

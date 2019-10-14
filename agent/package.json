@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build-docker-image": "docker build -t valera-s/ci-agent .",
-    "start": "docker run -p 8000:8000 -d valera-s/ci-agent"
+    "start": "docker run -d --rm --name ci-agent --network ci-net valera-s/ci-agent"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
