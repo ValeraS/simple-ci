@@ -22,5 +22,10 @@ config.serverHost = process.argv[2] || config.serverHost;
 config.serverPort = Number.parseInt(process.argv[3] || config.serverPort);
 config.port = Number.parseInt(process.argv[4] || config.port);
 config.buildPath = resolve(process.argv[5] || config.buildPath);
+config.runInDocker = process.env.RUN_IN_DOCKER || false;
+
+if (config.runInDocker) {
+  config.gateway = require('default-gateway').v4.sync().gateway;
+}
 
 module.exports = config;
