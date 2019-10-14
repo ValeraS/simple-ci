@@ -1,28 +1,44 @@
 <extends src="src/pages/index.html">
   <block name="content">
     <h1>Simple CI</h1>
-    <h2>repo: {{ repo }}</h2>
+    <h2>Repo: {{ repo }}</h2>
     <form action="/build" method="POST">
       <div>
-        <label> Hash <input name="hash" type="text" required /> </label>
+        <label> Hash: <input name="hash" type="text" required /> </label>
       </div>
       <div>
-        <label> Command <textarea name="command" required></textarea> </label>
+        <label> Command: <textarea name="command" required></textarea> </label>
       </div>
       <button type="submit">Add Task</button>
     </form>
     <h3>Tasks</h3>
-    <ol>
-      <each loop="taskInfo in tasks">
-        <scope with="taskInfo">
-          <li>
-            <a href="build/{{ id }}">
-              <span>{{ status }}</span> - {{ id }} -
-              {{ hash }} - {{ command }}
-            </a>
-          </li>
-        </scope>
+    <table>
+      <thead>
+        <tr>
+          <td>N</td>
+          <td>Status</td>
+          <td>ID</td>
+          <td>Hash</td>
+          <td>Command</td>
+        </tr>
+      </thead>
+      <each loop="taskInfo, index in tasks">
+        <tr>
+          <scope with="taskInfo">
+            <td>{{ index }}</td>
+            <td>{{ status }}</td>
+            <td>
+              <a href="build/{{ id }}">
+                {{ id }}
+              </a>
+            </td>
+            <td>{{ hash }}</td>
+            <td>
+              <code><pre>{{ command }}</pre></code>
+            </td>
+          </scope>
+        </tr>
       </each>
-    </ol>
+    </table>
   </block>
 </extends>

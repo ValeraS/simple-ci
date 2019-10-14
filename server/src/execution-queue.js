@@ -49,7 +49,7 @@ class ExecutionQueue {
   _queueJob(job) {
     const result = deferred();
     this._jobs.push([job, result.resolve]);
-    this._store.updateTask(job.id, { status: 'queued' });
+    this._store.updateTask(job.id, { status: 'pending' });
     this._schedule();
     return result;
   }

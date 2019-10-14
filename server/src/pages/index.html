@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Simple CI</title>
-</head>
-<body>
-  <block name="content"></block>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Simple CI</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        border: 1px solid gray;
+        padding: 5px;
+      }
+      pre {
+        margin: 0;
+      }
+      td:first-of-type {
+        width: 1%;
+      }
+      form {
+        width: 400px;
+      }
+      label {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      input {
+        flex-grow: 1;
+      }
+      input,
+      textarea,
+      button {
+        font-size: 14px;
+        line-height: 20px;
+      }
+      textarea {
+        width: 100%;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <block name="content"></block>
+  </body>
 </html>
