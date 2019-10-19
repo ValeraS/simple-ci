@@ -17,11 +17,12 @@ class TaskRunner {
     const { id, repo, hash, command } = task;
     const results = [];
 
+    const started = Date.now();
     const repoPath = join(this._prefix, id);
     const cloneResult = await clone(repo, repoPath, this._cwd);
     results.push(cloneResult);
     if (cloneResult.status) {
-      callback(this._returnResult(task, results));
+      callback(this._returnResult(task, results, started));
       return;
     }
 
@@ -30,23 +31,25 @@ class TaskRunner {
     const checkoutResult = await checkout(hash, repoCwd);
     results.push(checkoutResult);
     if (checkoutResult.status) {
-      callback(this._returnResult(task, results));
+      callback(this._returnResult(task, results, started));
       return;
     }
 
     const commandResult = await runCommand(command, repoCwd);
     results.push(commandResult);
-    callback(this._returnResult(task, results));
+    callback(this._returnResult(task, results, started));
     return;
   }
 
-  _returnResult(task, results) {
+  _returnResult(task, results, started) {
     const stdOut = results.reduce((out, { stdOut }) => [...out, ...stdOut], []);
     const stdErr = results.reduce((out, { stdErr }) => [...out, ...stdErr], []);
     const status = results[results.length - 1].status;
     return {
       ...task,
       status,
+      started,
+      finished: Date.now(),
       stdOut: Buffer.concat(stdOut).toString('utf-8'),
       stdErr: Buffer.concat(stdErr).toString('utf-8'),
     };
